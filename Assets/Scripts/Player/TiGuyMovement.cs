@@ -46,7 +46,7 @@ public class TiGuyMovement : NetworkBehaviour
 
     public void OnLanding() 
     {
-        animator.SetBool("IsJumping", false);
+        
     }
 
     private void FixedUpdate() {
