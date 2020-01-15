@@ -80,6 +80,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4586270092756931999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1836817513729433684}
+  m_Layer: 0
+  m_Name: Grab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1836817513729433684
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586270092756931999}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.214, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6915785215881051847}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5113818931500421860
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,9 +159,10 @@ GameObject:
   - component: {fileID: -7425125147365972204}
   - component: {fileID: 1804227461628515865}
   - component: {fileID: 660666346098023430}
+  - component: {fileID: -1410557179901498020}
   m_Layer: 0
   m_Name: TiGuy
-  m_TagString: Untagged
+  m_TagString: TiGuy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,6 +180,7 @@ Transform:
   m_Children:
   - {fileID: 7350913418854440676}
   - {fileID: 563130856900898416}
+  - {fileID: 1836817513729433684}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -270,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 6915785215881051845}
-  m_ParameterSendBits: 7
+  m_ParameterSendBits: 15
   param0: 
   param1: 
   param2: 
@@ -412,4 +444,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1804227461628515865}
   animator: {fileID: 6915785215881051845}
-  runSpeed: 5
+  runSpeed: 7
+--- !u!114 &-1410557179901498020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6915785215881051850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842a552b6292028498eb8b6cbd4ddb0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0.15
+  boxMask:
+    serializedVersion: 2
+    m_Bits: 1
+  grabPos: {fileID: 1836817513729433684}

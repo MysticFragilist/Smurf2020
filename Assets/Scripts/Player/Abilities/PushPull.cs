@@ -12,6 +12,7 @@ public class PushPull : MonoBehaviour
 
     private bool isPulling = false;
     private bool isPushing = false;
+    public Transform grabPos;
 
     GameObject box;
     // Start is called before the first frame update
@@ -25,23 +26,33 @@ public class PushPull : MonoBehaviour
     {
         if(Input.GetKeyUp(KeyCode.E)){
             toggle = !toggle;
+            if(toggle){
+                GetComponent<TiGuyMovement>().animator.SetBool("IsPushing", true);
+            } else {
+                GetComponent<TiGuyMovement>().animator.SetBool("IsPushing", false);
+            }
         }
 
         Physics2D.queriesStartInColliders = false;
-        RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.right * transform.localScale.x, distance, boxMask);
+        RaycastHit2D hit = Physics2D.Raycast (grabPos.position, Vector2.right * transform.localScale.x, distance, boxMask);
 
         if(hit.collider != null && hit.collider.gameObject.tag == "Pushable" && toggle)
         {
             box = hit.collider.gameObject;
 
-            box.GetComponent<FixedJoint2D> ().enabled = true;
-            box.GetComponent<BoxPull> ().beingPushed = true;
-            box.GetComponent<FixedJoint2D> ().connectedBody = this.GetComponent<Rigidbody2D> ();
+            if(box != null){
+                box.GetComponent<FixedJoint2D> ().enabled = true;
+                box.GetComponent<BoxPull> ().beingPushed = true;
+                box.GetComponent<FixedJoint2D> ().connectedBody = this.GetComponent<Rigidbody2D> ();
+            }
+            
 
         } else if (!toggle)
         {
-            box.GetComponent<FixedJoint2D> ().enabled = false;
-            box.GetComponent<BoxPull> ().beingPushed = false;
+            if(box != null){
+                box.GetComponent<FixedJoint2D> ().enabled = false;
+                box.GetComponent<BoxPull> ().beingPushed = false;
+            }
         }
         
     }
@@ -49,6 +60,6 @@ public class PushPull : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, (Vector2)transform.position + Vector2.right * transform.localScale.x * distance);
+        Gizmos.DrawLine(grabPos.position, (Vector2)grabPos.position + Vector2.right * transform.localScale.x * distance);
     }
 }
