@@ -45,14 +45,12 @@ public class GrosJeanMovement : NetworkBehaviour
         if (Input.GetButtonDown("Jump")) {
             jump = true;
             animator.SetBool("IsJumping", true);
-            Debug.Log("IsJumping - True");
         }
     }
 
     public void OnLanding() 
     {
         animator.SetBool("IsJumping", false);
-        Debug.Log("IsJumping - False");
     }
 
     private void FixedUpdate() {
