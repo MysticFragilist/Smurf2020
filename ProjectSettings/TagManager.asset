@@ -42,10 +42,13 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
   m_SortingLayers:
+  - name: FatTrees
+    uniqueID: 1963435885
+    locked: 0
+  - name: Background
+    uniqueID: 3502647325
+    locked: 0
   - name: trees3
     uniqueID: 2434863981
     locked: 0
