@@ -41,6 +41,7 @@ public class CharacterController2D : NetworkBehaviour
 
 	private void Awake()
 	{
+
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
 
 		if (OnLandEvent == null)
@@ -52,6 +53,9 @@ public class CharacterController2D : NetworkBehaviour
 
 	private void FixedUpdate()
 	{
+		if(!isLocalPlayer)
+			return;
+
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
 
@@ -72,6 +76,7 @@ public class CharacterController2D : NetworkBehaviour
 
 	public void Move(float move, bool crouch, bool jump)
 	{
+		
 		// If crouching, check to see if the character can stand up
 		if (!crouch)
 		{
@@ -144,6 +149,9 @@ public class CharacterController2D : NetworkBehaviour
 
 	public void OnFaceSideChange(bool faceRight) 
 	{
+		if (!isLocalPlayer)
+			return;
+
 		Vector3 theScale = transform.localScale;
 		float theScaleAbsX = Mathf.Abs(transform.localScale.x);
 

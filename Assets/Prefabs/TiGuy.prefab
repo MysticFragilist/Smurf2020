@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 660666346098023430}
   m_Layer: 0
   m_Name: TiGuy
-  m_TagString: Untagged
+  m_TagString: TiGuy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
