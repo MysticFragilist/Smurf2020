@@ -15,48 +15,106 @@ public class PushPull : MonoBehaviour
     public Transform grabPos;
 
     GameObject box;
+
+    private TiGuyMovement movementScript;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        movementScript = GetComponent<TiGuyMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.E)){
+        // Toggle Switch
+        if (Input.GetKeyUp(KeyCode.E)) {
             toggle = !toggle;
-            if(toggle){
-                GetComponent<TiGuyMovement>().animator.SetBool("IsPushing", true);
+
+            if(toggle) {
+                movementScript.animator.SetBool("IsPushing", true);
             } else {
-                GetComponent<TiGuyMovement>().animator.SetBool("IsPushing", false);
-            }
-        }
-
-        Physics2D.queriesStartInColliders = false;
-        RaycastHit2D hit = Physics2D.Raycast (grabPos.position, Vector2.right * transform.localScale.x, distance, boxMask);
-
-        if(hit.collider != null && hit.collider.gameObject.tag == "Pushable" && toggle)
-        {
-            box = hit.collider.gameObject;
-
-            if(box != null){
-                box.GetComponent<FixedJoint2D> ().enabled = true;
-                box.GetComponent<BoxPull> ().beingPushed = true;
-                box.GetComponent<FixedJoint2D> ().connectedBody = this.GetComponent<Rigidbody2D> ();
-            }
-            
-
-        } else if (!toggle)
-        {
-            if(box != null){
-                box.GetComponent<FixedJoint2D> ().enabled = false;
-                box.GetComponent<BoxPull> ().beingPushed = false;
+                movementScript.animator.SetBool("IsPushing", false);
             }
         }
         
+        // Toggle Actions
+        if (toggle) {
+            if (!isPushing && !isPulling) {
+                Physics2D.queriesStartInColliders = false;
+                RaycastHit2D hit = Physics2D.Raycast(grabPos.position, Vector2.right * transform.localScale.x, distance, boxMask);
+
+                if (hit.collider != null && hit.collider.gameObject.tag == "Pushable") {
+                    box = hit.collider.gameObject;
+
+                    if (box != null) {
+                        if (!movementScript.isMovingObject) {
+                            movementScript.isMovingObject = true;
+                            isPushing = true;
+                        }
+
+                        box.GetComponent<FixedJoint2D>().enabled = true;
+                        box.GetComponent<BoxPull>().beingPushed = true;
+                        box.GetComponent<FixedJoint2D>().connectedBody = GetComponent<Rigidbody2D>();
+                    }
+                }
+            } else {
+                // Si dir positive, pushing
+                // Sinon pulling
+                if (box != null) {
+                    bool isToTheRight = Vector2.Distance(this.transform.position, box.transform.position) < 0;
+
+                    //Debug.Log(movementScript.controller.direction);
+                    if (movementScript.controller.direction == TextureDirection.RIGHT) {
+                        if(isToTheRight) {
+                            isPushing = true;
+                            isPulling = false;
+                            movementScript.animator.SetBool("IsPushing", true);
+                            movementScript.animator.SetBool("IsPulling", false);
+                        } else {
+                            isPushing = false;
+                            isPulling = true;
+                            movementScript.animator.SetBool("IsPushing", false);
+                            movementScript.animator.SetBool("IsPulling", true);
+                        }
+                    } else if (movementScript.controller.direction == TextureDirection.LEFT) {
+                        if (isToTheRight) {
+                            isPushing = false;
+                            isPulling = true;
+                            movementScript.animator.SetBool("IsPushing", false);
+                            movementScript.animator.SetBool("IsPulling", true);
+                        } else {
+                            isPushing = true;
+                            isPulling = false;
+                            movementScript.animator.SetBool("IsPushing", true);
+                            movementScript.animator.SetBool("IsPulling", false);
+                        }
+                    }
+                }
+            }
+        } else {
+            if (box != null) {
+                if (movementScript.isMovingObject) {
+                    movementScript.isMovingObject = false;
+                    isPulling = false;
+                    isPushing = false;
+                    movementScript.animator.SetBool("IsPushing", false);
+                    movementScript.animator.SetBool("IsPulling", false);
+                }
+
+                box.GetComponent<FixedJoint2D>().enabled = false;
+                box.GetComponent<BoxPull> ().beingPushed = false;
+                box = null;
+            }
+        }
     }
 
+    void ActivatePush() {
+
+    }
+
+    // Just to see where the raycast will hit
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;

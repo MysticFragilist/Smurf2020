@@ -5,9 +5,10 @@ using UnityEngine.Networking;
 
 public class TiGuyMovement : NetworkBehaviour
 {
-    public CharacterController2D controller;
+    public TiGuyCharacterController2D controller;
     public Animator animator;
     public float runSpeed = 40f;
+    public bool isMovingObject = false;
 
     [SyncVar]
     float horizontalMove = 0f;
@@ -51,6 +52,6 @@ public class TiGuyMovement : NetworkBehaviour
         if (!this.GetComponent<NetworkIdentity>().isLocalPlayer)
             return;
         
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false, false);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, isMovingObject);
     }
 }

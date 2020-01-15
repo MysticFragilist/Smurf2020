@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 7925059115466311205}
   - component: {fileID: 5384246333299472646}
   - component: {fileID: -7425125147365972204}
-  - component: {fileID: 1804227461628515865}
+  - component: {fileID: 8575970317491997571}
   - component: {fileID: 660666346098023430}
   - component: {fileID: -1410557179901498020}
   m_Layer: 0
@@ -391,7 +391,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1804227461628515865
+--- !u!114 &8575970317491997571
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -400,11 +400,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6915785215881051850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f0e7e9b60c97864bbd40e982b96d673, type: 3}
+  m_Script: {fileID: 11500000, guid: 47731095a5a68ab47a7e2ba0f4353025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 300
-  m_CrouchSpeed: 0.612
   m_MovementSmoothing: 0
   m_AirControl: 1
   m_WhatIsGround:
@@ -412,24 +410,6 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_GroundCheck: {fileID: 563130856900898416}
   m_CeilingCheck: {fileID: 7350913418854440676}
-  m_CrouchDisableCollider: {fileID: 0}
-  OnLandEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OnLanding
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnCrouchEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &660666346098023430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,9 +422,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421f07facd617ea429931024d1f0e136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 1804227461628515865}
+  controller: {fileID: 8575970317491997571}
   animator: {fileID: 6915785215881051845}
   runSpeed: 7
+  isMovingObject: 0
 --- !u!114 &-1410557179901498020
 MonoBehaviour:
   m_ObjectHideFlags: 0
