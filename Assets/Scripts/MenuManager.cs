@@ -62,7 +62,11 @@ public class MenuManager : MonoBehaviour
         OptionsMenu.SetActive(false);
         MainMenu.SetActive(true);
     }
-
+    public void OpenMainMenuFromMultiplayerLobby()
+    {
+        MultiplayerMenu.SetActive(false);
+        MainMenu.SetActive(true);
+    }
     public void fadeAway()
     {
         StartCoroutine(FadeTo(0.0f, 2.0f));
