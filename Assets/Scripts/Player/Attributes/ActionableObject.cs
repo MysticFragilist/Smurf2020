@@ -10,7 +10,7 @@ public enum ActivableCandidate {
 }
 public class ActionableObject : NetworkBehaviour
 {
-    
+    public Sprite spriteLeft, spriteRight;
     public int forceToMakeItActive = 1;
     public ActivableCandidate CandidateToUse = ActivableCandidate.ANY;
     public List<InteracteableObject> listInteractableObjects;
@@ -22,6 +22,10 @@ public class ActionableObject : NetworkBehaviour
     private GameObject ButtonDisplayFabricated = null;
     void Update() 
     {
+        if (hasInteractableButton && ButtonDisplayFabricated != null && Input.GetButtonDown("Crouch")) 
+        {
+            Activate(1, ActivableCandidate.GROSJEAN);
+        }
     }
 
     public void Activate(int forceUse, ActivableCandidate candidate) 
