@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject MainMenu;
     public GameObject PauseMenu;
-    public GameObject Reprendre;
     public GameObject OptionsMenu;
+
 
     public void OpenOptions()
     {
@@ -23,5 +22,13 @@ public class GameManager : MonoBehaviour
     {
         OptionsMenu.SetActive(false);
         PauseMenu.SetActive(true);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseMenu.SetActive(true);
+        }
     }
 }
