@@ -18,6 +18,9 @@ TagManager:
   - UI
   - 
   - 
+  - Trees2
+  - Floor
+  - Trees
   - Player
   - 
   - 
@@ -39,10 +42,25 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
   m_SortingLayers:
+  - name: FatTrees
+    uniqueID: 1963435885
+    locked: 0
+  - name: Background
+    uniqueID: 3502647325
+    locked: 0
+  - name: trees3
+    uniqueID: 2434863981
+    locked: 0
+  - name: trees2
+    uniqueID: 941425941
+    locked: 0
+  - name: Floor
+    uniqueID: 4081591373
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: trees
+    uniqueID: 2901689551
     locked: 0

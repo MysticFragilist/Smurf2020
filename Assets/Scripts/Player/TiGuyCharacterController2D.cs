@@ -17,7 +17,7 @@ public class TiGuyCharacterController2D : NetworkBehaviour
 	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
 	private Rigidbody2D m_Rigidbody2D;
 
-    [SyncVar(hook="OnFaceSideChange")]
+    [SyncVar]
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     public TextureDirection direction = TextureDirection.RIGHT;
 	private Vector3 m_Velocity = Vector3.zero;
@@ -87,7 +87,7 @@ public class TiGuyCharacterController2D : NetworkBehaviour
                 // If the input is moving the player right and the player is facing left...
                 if(!m_FacingRight && !isMovingObject) {
                     // ... flip the player.
-                    m_FacingRight = !m_FacingRight;
+                    CmdUpdateServerSyncedVariable(!m_FacingRight);
                 }
                 
             } else if (move < 0) {
@@ -99,28 +99,36 @@ public class TiGuyCharacterController2D : NetworkBehaviour
                 // Otherwise if the input is moving the player left and the player is facing right...
                 if (m_FacingRight && !isMovingObject) {
                     // ... flip the player.
-                    m_FacingRight = !m_FacingRight;
+                    CmdUpdateServerSyncedVariable(!m_FacingRight);
                 }
             }
 
         }
 	}
 
+    [Command]
+    void CmdUpdateServerSyncedVariable(bool newValue) {
 
-	public void OnFaceSideChange(bool faceRight) 
-	{
-		if (!isLocalPlayer)
-			return;
+        m_FacingRight = newValue;
 
-		Vector3 theScale = transform.localScale;
-		float theScaleAbsX = Mathf.Abs(transform.localScale.x);
+        //It's important to pass the correct updated value as a parameter in your Rpc function!
+        RpcOnFaceSideChange(newValue); //or ...(serverSyncedVariable);
 
-		if(faceRight)
-			theScaleAbsX *= 1;
-		else 
-			theScaleAbsX *= -1;
+    }
 
-		theScale.x = theScaleAbsX;
-		transform.localScale = theScale;
-	}
+    [ClientRpc]
+    public void RpcOnFaceSideChange(bool faceRight) {
+        m_FacingRight = faceRight;
+
+        Vector3 theScale = transform.localScale;
+        float theScaleAbsX = Mathf.Abs(transform.localScale.x);
+
+        if (faceRight)
+            theScaleAbsX *= 1;
+        else
+            theScaleAbsX *= -1;
+
+        theScale.x = theScaleAbsX;
+        transform.localScale = theScale;
+    }
 }
