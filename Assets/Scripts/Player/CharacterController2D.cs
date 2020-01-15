@@ -25,7 +25,7 @@ public class CharacterController2D : NetworkBehaviour
 	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
 	private Rigidbody2D m_Rigidbody2D;
 
-    [SyncVar(hook="OnFaceSideChange")]
+    [SyncVar]
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
 
@@ -53,8 +53,8 @@ public class CharacterController2D : NetworkBehaviour
 
 	private void FixedUpdate()
 	{
-		if(!isLocalPlayer)
-			return;
+		/*if(!isLocalPlayer)
+			return;*/
 
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
@@ -127,14 +127,14 @@ public class CharacterController2D : NetworkBehaviour
 			// If the input is moving the player right and the player is facing left...
 			if (move > 0 && !m_FacingRight)
 			{
-				// ... flip the player.
-				m_FacingRight = !m_FacingRight;
+                // ... flip the player.
+                CmdUpdateServerSyncedVariable(!m_FacingRight);
 			}
 			// Otherwise if the input is moving the player left and the player is facing right...
 			else if (move < 0 && m_FacingRight)
 			{
-				// ... flip the player.
-				m_FacingRight = !m_FacingRight;
+                // ... flip the player.
+                CmdUpdateServerSyncedVariable(!m_FacingRight);
 			}
 		}
 		// If the player should jump...
@@ -146,11 +146,20 @@ public class CharacterController2D : NetworkBehaviour
 		}
 	}
 
+    [Command]
+    void CmdUpdateServerSyncedVariable(bool newValue) {
 
-	public void OnFaceSideChange(bool faceRight) 
+        m_FacingRight = newValue;
+
+        //It's important to pass the correct updated value as a parameter in your Rpc function!
+        RpcOnFaceSideChange(newValue); //or ...(serverSyncedVariable);
+
+    }
+
+    [ClientRpc]
+    public void RpcOnFaceSideChange(bool faceRight) 
 	{
-		if (!isLocalPlayer)
-			return;
+        m_FacingRight = faceRight;
 
 		Vector3 theScale = transform.localScale;
 		float theScaleAbsX = Mathf.Abs(transform.localScale.x);
