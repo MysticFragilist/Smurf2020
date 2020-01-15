@@ -10,7 +10,6 @@ public class CustomNetworkManager : NetworkManager
     public string host = "localhost";
     public List<GameObject> playerPrefabs;
 
-    public Transform spawnPoint;
     public float SpawnRadius = 0.5f;
 
     public void StartHosting() {
