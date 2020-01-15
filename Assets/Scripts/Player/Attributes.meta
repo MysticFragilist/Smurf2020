@@ -1,12 +1,7 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Prefabs/GrosJean.prefab.meta
-guid: bbabdfc44f25293439546b6683905397
-PrefabImporter:
-=======
-guid: 52435ff44c4dc9c4ab20a9acb2fe77dd
+guid: d8aa2f9f4605b60449a6230aac849754
 folderAsset: yes
 DefaultImporter:
->>>>>>> 72adb42f5e13494714cdab3f1ce752d44135147b:Assets/Scripts/Player/Attributes.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

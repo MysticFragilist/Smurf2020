@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Animations/GrosJean.meta
-guid: cc91fd9efc462e844ba948e65e87933b
-=======
-guid: 64d65a863ab228542bd1700bbff383d4
->>>>>>> 72adb42f5e13494714cdab3f1ce752d44135147b:Assets/Prefabs/Interactible.meta
+guid: e733b3a7ae81b1643905862b49f1fbf8
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
