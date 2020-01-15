@@ -39,7 +39,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2718526630223148007}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4394a3eef724546f896557197e2d6c44, type: 3}
   m_Name: 
@@ -69,8 +69,7 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 6915785215881051850, guid: bbabdfc44f25293439546b6683905397,
-    type: 3}
+  m_PlayerPrefab: {fileID: 0}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
   m_OfflineScene: 
@@ -131,7 +130,8 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
-  playerTiGuy: {fileID: 6915785215881051850, guid: ea7d6793f99304c46adba237a229c7a5,
-    type: 3}
-  playerGrosJean: {fileID: 6915785215881051850, guid: bbabdfc44f25293439546b6683905397,
-    type: 3}
+  host: localhost
+  playerPrefabs:
+  - {fileID: 6915785215881051850, guid: bbabdfc44f25293439546b6683905397, type: 3}
+  - {fileID: 6915785215881051850, guid: ea7d6793f99304c46adba237a229c7a5, type: 3}
+  SpawnRadius: 0.5

@@ -5,72 +5,63 @@ using UnityEngine.Networking;
 
 public class CustomNetworkManager : NetworkManager
 {
-    List<GameObject> playersConnected = new List<GameObject>();
-    
-    public GameObject playerTiGuy;
-    public GameObject playerGrosJean;
+    Dictionary<short, GameObject> playersConnected = new Dictionary<short, GameObject>();
 
-    public Transform spawnPoint;
+    public string host = "localhost";
+    public List<GameObject> playerPrefabs;
+
     public float SpawnRadius = 0.5f;
 
-    public void StartHosting()
-    {
+    public void StartHosting() {
+        playersConnected = new Dictionary<short, GameObject>();
         SetPort();
         NetworkManager.singleton.StartHost();
-
     }
 
-    public void JoinGame()
-    {
+    public void JoinGame() {
         SetIPAddress();
         SetPort();
         NetworkManager.singleton.StartClient();
     }
    
-    void SetPort()
-    {
-        NetworkManager.singleton.networkPort=7777;
-    } 
-
-    void SetIPAddress()
-    {
-        NetworkManager.singleton.networkAddress = "localhost";
-    } 
-
-    void OnLevelWasLoaded(int level)
-    {
-        if(level == 0)
-        {
-         
-        }
-        else
-        {
-
-        }
+    void SetPort() {
+        NetworkManager.singleton.networkPort = 7777;
     }
 
-    public void DisconnectFromHost()
-    {
+    void SetIPAddress() {
+        NetworkManager.singleton.networkAddress = host;
+    }
+
+    public void DisconnectFromHost() {
         NetworkManager.singleton.StopHost();
+        // TODO: Revenir a la scene du menu
+    }
+        
+    public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController playerController) {
+        playersConnected.Remove(playerController.playerControllerId);
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId) {
-
-        Debug.Log("player connected");
+        Debug.Log("Players Connected: " + playersConnected.Count);
         GameObject player = null;
-        Vector3 spawnPosition = spawnPoint.position;
+        Vector3 spawnPosition = GetStartPosition().position;
+
+        // The host is connecting
         if (playersConnected.Count == 0) {
             spawnPosition.x += SpawnRadius;
-            player = Instantiate(playerTiGuy, spawnPosition, Quaternion.identity);
+            player = Instantiate(playerPrefabs[0], spawnPosition, Quaternion.identity);
 
+        // A second client is connecting after the host
         } else if (playersConnected.Count == 1) {
             spawnPosition.x -= SpawnRadius;
-            player = Instantiate(playerGrosJean, spawnPosition, Quaternion.identity);
+            player = Instantiate(playerPrefabs[1], spawnPosition, Quaternion.identity);
         }
+
+        // Publish the connection over all clients
         if (player != null) {
-            Debug.Log("List " + playersConnected.Count);
-            Debug.Log("ID " + playerControllerId);
-            playersConnected.Add(player);
+            if (!playersConnected.ContainsKey(playerControllerId)) {
+                playersConnected.Add(playerControllerId, player);
+            }
             NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
         }
     }
