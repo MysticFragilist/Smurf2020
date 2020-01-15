@@ -38,13 +38,10 @@ public class Punch : MonoBehaviour
             }
 
             if (punchingTimer >= 0.4f && !hasHit) {
-                Debug.Log("Punch");
                 hasHit = true;
                 RaycastHit2D hit = Physics2D.Raycast(grabPos.position, Vector2.right * transform.localScale.x, distance, boxMask);
-
-                Debug.Log(hit.collider);
+                
                 if (hit.collider != null && hit.collider.gameObject.tag == "Destroyable") {
-                    Debug.Log("HIT");
                     Destroy(hit.collider.gameObject);
                 }
             }
