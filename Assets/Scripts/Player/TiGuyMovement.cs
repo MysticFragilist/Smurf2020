@@ -11,9 +11,7 @@ public class TiGuyMovement : NetworkBehaviour
 
     [SyncVar]
     float horizontalMove = 0f;
-    [SyncVar]
-    bool crouch = false;
-    public int ID { get; private set; } = 0; 
+    public int ID { get; private set; } = 0;
 
     private static int conpteID = 0;
 
@@ -27,7 +25,7 @@ public class TiGuyMovement : NetworkBehaviour
     void Start()
     {
         conpteID ++;
-        if (this.GetComponent<NetworkIdentity>().isLocalPlayer) 
+        if (this.GetComponent<NetworkIdentity>().isLocalPlayer)
         {
             this.ID = conpteID;
             Debug.Log("This ID " + this.ID + " is created");
@@ -44,15 +42,15 @@ public class TiGuyMovement : NetworkBehaviour
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
     }
 
-    public void OnLanding() 
+    public void OnLanding()
     {
-        
+      // Actually does nothing  
     }
 
     private void FixedUpdate() {
         if (!this.GetComponent<NetworkIdentity>().isLocalPlayer)
             return;
         
-        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, false);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false, false);
     }
 }
