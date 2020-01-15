@@ -64,8 +64,7 @@ public class PushPull : MonoBehaviour
                 // Sinon pulling
                 if (box != null) {
                     bool isToTheRight = Vector2.Distance(this.transform.position, box.transform.position) < 0;
-
-                    //Debug.Log(movementScript.controller.direction);
+                    
                     if (movementScript.controller.direction == TextureDirection.RIGHT) {
                         if(isToTheRight) {
                             isPushing = true;
@@ -108,10 +107,6 @@ public class PushPull : MonoBehaviour
                 box = null;
             }
         }
-    }
-
-    void ActivatePush() {
-
     }
 
     // Just to see where the raycast will hit
