@@ -131,7 +131,9 @@ MonoBehaviour:
   matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
-  playerTiGuy: {fileID: 6915785215881051850, guid: ea7d6793f99304c46adba237a229c7a5,
-    type: 3}
-  playerGrosJean: {fileID: 6915785215881051850, guid: bbabdfc44f25293439546b6683905397,
-    type: 3}
+  host: localhost
+  playerPrefabs:
+  - {fileID: 6915785215881051850, guid: bbabdfc44f25293439546b6683905397, type: 3}
+  - {fileID: 6915785215881051850, guid: ea7d6793f99304c46adba237a229c7a5, type: 3}
+  spawnPoint: {fileID: 0}
+  SpawnRadius: 0.5
