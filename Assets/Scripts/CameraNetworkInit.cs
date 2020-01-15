@@ -10,6 +10,6 @@ public class CameraNetworkInit : MonoBehaviour
         this.GetComponentsInChildren<CinemachineVirtualCamera>()[0].Follow = target;
         CinemachineFramingTransposer framingBody = this.GetComponentsInChildren<CinemachineVirtualCamera>()[0].GetCinemachineComponent<CinemachineFramingTransposer>();
         
-        framingBody.m_DeadZoneHeight = 2;
+        framingBody.m_DeadZoneHeight = 1;
     }
 }
