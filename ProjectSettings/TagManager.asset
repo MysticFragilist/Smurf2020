@@ -8,6 +8,7 @@ TagManager:
   - Pushable
   - GrosJean
   - TiGuy
+  - Destroyable
   layers:
   - Default
   - TransparentFX
@@ -20,6 +21,9 @@ TagManager:
   - Trees2
   - Floor
   - Trees
+  - Player
+  - 
+  - 
   - 
   - 
   - 

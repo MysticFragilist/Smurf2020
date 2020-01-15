@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Events;
 
-public enum textureDirection {
+public enum TextureDirection {
 	LEFT = -1,
 	RIGHT = 1
 }
