@@ -5,8 +5,6 @@ using UnityEngine.Audio;
 
 public class Options : MonoBehaviour
 {
-    public 
-
     public void SetVolume(float volume)
     {
 
