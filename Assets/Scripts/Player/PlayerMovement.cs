@@ -19,6 +19,7 @@ public class PlayerMovement : NetworkBehaviour
 
     private static int compteID = 0;
 
+
     public override void OnStartLocalPlayer()
     {
         Camera.main.GetComponent<CameraNetworkInit>().setTarget(this.gameObject.transform);
