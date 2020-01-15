@@ -17,21 +17,21 @@ public class PlayerMovement : NetworkBehaviour
     bool jump = false;
     public int ID { get; private set; } = 0; 
 
-    private static int conpteID = 0;
+    private static int compteID = 0;
+
 
     public override void OnStartLocalPlayer()
-     {
-         Camera.main.GetComponent<CameraNetworkInit>().setTarget(this.gameObject.transform);
-     }
-
+    {
+        Camera.main.GetComponent<CameraNetworkInit>().setTarget(this.gameObject.transform);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        conpteID ++;
-        if (this.GetComponent<NetworkIdentity>().isLocalPlayer) 
+        compteID ++;
+        if (isLocalPlayer) 
         {
-            this.ID = conpteID;
+            this.ID = compteID;
             Debug.Log("This ID " + this.ID + " is created");
         }
     }
@@ -39,7 +39,7 @@ public class PlayerMovement : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!this.GetComponent<NetworkIdentity>().isLocalPlayer)
+        if (!isLocalPlayer)
             return;
         
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
@@ -62,7 +62,7 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     private void FixedUpdate() {
-        if (!this.GetComponent<NetworkIdentity>().isLocalPlayer)
+        if (!isLocalPlayer)
             return;
         
         controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
