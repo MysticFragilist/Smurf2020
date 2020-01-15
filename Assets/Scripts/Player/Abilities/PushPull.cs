@@ -5,7 +5,7 @@ using UnityEngine;
 public class PushPull : MonoBehaviour
 {
 
-    public float distance = 1f;
+    public float distance = 0.15f;
     public LayerMask boxMask;
     private bool toggle = false;
     private int compteur = 0;
@@ -63,7 +63,7 @@ public class PushPull : MonoBehaviour
                 // Si dir positive, pushing
                 // Sinon pulling
                 if (box != null) {
-                    bool isToTheRight = Vector2.Distance(this.transform.position, box.transform.position) < 0;
+                    bool isToTheRight = (this.transform.position.x - box.transform.position.x) < 0;
                     
                     if (movementScript.controller.direction == TextureDirection.RIGHT) {
                         if(isToTheRight) {

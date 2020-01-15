@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 563130856900898416}
   - component: {fileID: 4987985790062337922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1836817513729433684}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7350913418854440676}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CeilingCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,8 @@ GameObject:
   - component: {fileID: 8575970317491997571}
   - component: {fileID: 660666346098023430}
   - component: {fileID: -1410557179901498020}
-  m_Layer: 0
+  - component: {fileID: 589203218}
+  m_Layer: 8
   m_Name: TiGuy
   m_TagString: TiGuy
   m_Icon: {fileID: 0}
@@ -410,6 +411,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_GroundCheck: {fileID: 563130856900898416}
   m_CeilingCheck: {fileID: 7350913418854440676}
+  direction: 1
 --- !u!114 &660666346098023430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,6 +441,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 0.15
+  boxMask:
+    serializedVersion: 2
+    m_Bits: 1
+  grabPos: {fileID: 1836817513729433684}
+--- !u!114 &589203218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6915785215881051850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d09e8b841647cc344bdb188b80bdd69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0.3
   boxMask:
     serializedVersion: 2
     m_Bits: 1
