@@ -12,6 +12,6 @@ public class CameraNetworkInit : MonoBehaviour
 
     public void setTarget(Transform target)
     {
-        this.GetComponent<CinemachineVirtualCamera>().Follow = target;
+        this.GetComponentsInChildren<CinemachineVirtualCamera>()[0].Follow = target;
     }
 }
