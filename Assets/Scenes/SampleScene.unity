@@ -1469,7 +1469,7 @@ PrefabInstance:
     - target: {fileID: 3221509017914443776, guid: 984a87dff559c9141b22aebfb2dc0060,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: -4.62
       objectReference: {fileID: 0}
     - target: {fileID: 3221509017914443776, guid: 984a87dff559c9141b22aebfb2dc0060,
         type: 3}
@@ -1515,6 +1515,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LocalPlayerCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221509017914443807, guid: 984a87dff559c9141b22aebfb2dc0060,
+        type: 3}
+      propertyPath: orthographic size
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221509017914443807, guid: 984a87dff559c9141b22aebfb2dc0060,
+        type: 3}
+      propertyPath: orthographic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3221509017914443807, guid: 984a87dff559c9141b22aebfb2dc0060,
+        type: 3}
+      propertyPath: field of view
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 984a87dff559c9141b22aebfb2dc0060, type: 3}
