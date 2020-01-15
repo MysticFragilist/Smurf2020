@@ -7,6 +7,9 @@ public class BoxPull : MonoBehaviour
 
     public bool beingPushed;
     float xPos;
+    bool grabbed = false;
+    public float height = 0.03f;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +21,15 @@ public class BoxPull : MonoBehaviour
     {
         if (!beingPushed) {
             transform.position = new Vector3 (xPos, transform.position.y);
+            grabbed = false;
 
         } else{
             xPos = transform.position.x;
+            if(!grabbed){
+                transform.position = new Vector3(transform.position.x, transform.position.y + height, transform.position.z);
+                grabbed = true;
+            }
         }
+
     }
 }
