@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.Audio;
 
 public class MenuManager : MonoBehaviour
 {
@@ -87,5 +88,12 @@ public class MenuManager : MonoBehaviour
         TitleScreen.SetActive(false);
         MainMenu.SetActive(true);
         //eventSystems.SetSelectedGameObject(NextSelectedBtn);
+    }
+
+    public AudioMixer audioMixer;
+
+    public void SetVolume(float volume)
+    {
+        audioMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
     }
 }
