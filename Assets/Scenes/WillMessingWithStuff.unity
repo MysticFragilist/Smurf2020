@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 153629475}
   - component: {fileID: 153629474}
   m_Layer: 0
-  m_Name: toggleableBlock
+  m_Name: ToggleableBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -574,7 +574,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153629473}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.739, y: -1.6023661, z: 0.90471953}
+  m_LocalPosition: {x: -3.56, y: -1.344, z: 0.90471953}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1798,7 +1798,7 @@ PrefabInstance:
     - target: {fileID: 2577730108283070730, guid: 331d58564eb458a41bf2a2bb10ddfe23,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.708051
+      value: -5.325
       objectReference: {fileID: 0}
     - target: {fileID: 2577730108283070730, guid: 331d58564eb458a41bf2a2bb10ddfe23,
         type: 3}
@@ -1853,7 +1853,7 @@ PrefabInstance:
     - target: {fileID: 2577730108283070743, guid: 331d58564eb458a41bf2a2bb10ddfe23,
         type: 3}
       propertyPath: m_Name
-      value: levier
+      value: Levier
       objectReference: {fileID: 0}
     - target: {fileID: 8700326832396744530, guid: 331d58564eb458a41bf2a2bb10ddfe23,
         type: 3}
