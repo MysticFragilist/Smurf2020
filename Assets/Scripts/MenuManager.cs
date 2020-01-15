@@ -22,7 +22,6 @@ public class MenuManager : MonoBehaviour
         MainMenu.SetActive(false);
         MultiplayerMenu.SetActive(true);
     }
-
     private void LoadSampleScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -61,7 +60,7 @@ public class MenuManager : MonoBehaviour
     }
     public void OpenMainMenuFromCredits()
     {
-        OptionsMenu.SetActive(false);
+        CreditsMenu.SetActive(false);
         MainMenu.SetActive(true);
     }
     public void OpenMainMenuFromMultiplayerLobby()
@@ -96,4 +95,5 @@ public class MenuManager : MonoBehaviour
     {
         audioMixer.SetFloat("volume", Mathf.Log10(volume) * 20);
     }
+    
 }
