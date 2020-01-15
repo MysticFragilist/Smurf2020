@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
+using UnityEngine.SceneManagement;
 public class CustomNetworkManager : NetworkManager
 {
    public void StartHosting()
@@ -44,5 +44,6 @@ public class CustomNetworkManager : NetworkManager
    public void DisconnectFromHost()
    {
       NetworkManager.singleton.StopHost();
+        SceneManager.LoadScene(0);
    }
 }
