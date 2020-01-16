@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
+
 
 public class CustomNetworkManager : NetworkManager
 {
@@ -34,9 +36,20 @@ public class CustomNetworkManager : NetworkManager
 
     public void DisconnectFromHost() {
         NetworkManager.singleton.StopHost();
-        // TODO: Revenir a la scene du menu
+        SceneManager.LoadScene("MenuParticles");
     }
-        
+
+    public override void OnStopServer()
+    {
+        playersConnected.Clear();
+        base.OnStopServer();
+    }
+
+    public override void OnClientDisconnect(NetworkConnection conn)
+    {
+        SceneManager.LoadScene("MenuParticles");
+        base.OnClientDisconnect(conn);
+    }
     public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController playerController) {
         playersConnected.Remove(playerController.playerControllerId);
     }
