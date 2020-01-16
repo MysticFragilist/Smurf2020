@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 1804227461628515865}
   - component: {fileID: 1047542211904283701}
   - component: {fileID: -1825064695265514646}
+  - component: {fileID: 8358794032448560701}
   m_Layer: 11
   m_Name: GrosJean
   m_TagString: GrosJean
@@ -377,7 +378,7 @@ MonoBehaviour:
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 1847
+    m_Bits: 5655
   m_GroundCheck: {fileID: 563130856900898416}
   m_CeilingCheck: {fileID: 7350913418854440676}
   raycastLength: 0.35
@@ -425,3 +426,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c0ffdcfc42c64b4b997e8a58afd0518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8358794032448560701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6915785215881051850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341f1c079e303464880085229c9e8fe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0.18
+  boxMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  grabPos: {fileID: 563130856900898416}

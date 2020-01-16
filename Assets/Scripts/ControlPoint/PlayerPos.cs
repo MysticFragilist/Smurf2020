@@ -19,14 +19,9 @@ public class PlayerPos : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Keypad5)){
-            RpcSendTeleport();
-        }
-        
-    }
-
-    [ClientRpc]
-    public void RpcSendTeleport(){
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             transform.position = gm.lastCheckPointPos;
+        }
+        
     }
 }
