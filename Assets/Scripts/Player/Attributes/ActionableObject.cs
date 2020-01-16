@@ -31,7 +31,7 @@ public class ActionableObject : NetworkBehaviour
         }
     }
 
-    public void Activate(int forceUse, ActivableCandidate candidate) 
+    public void Activate(int forceUse, ActivableCandidate candidate)
     {
         if (forceUse >= forceToMakeItActive && (candidate == CandidateToUse || CandidateToUse == ActivableCandidate.ANY)) 
         {

@@ -285,62 +285,26 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
         type: 3}
-      propertyPath: m_Channels.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
-        type: 3}
       propertyPath: m_SpawnPrefabs.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
         type: 3}
-      propertyPath: spawnPoint
-      value: 
+      propertyPath: m_OnlineScene
+      value: WillMessingWithStuff
       objectReference: {fileID: 0}
-    - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
-        type: 3}
-      propertyPath: m_PlayerPrefab
-      value: 
-      objectReference: {fileID: 6915785215881051850, guid: ea7d6793f99304c46adba237a229c7a5,
-        type: 3}
-    - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
-        type: 3}
-      propertyPath: m_AutoCreatePlayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
-        type: 3}
-      propertyPath: m_CustomConfig
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
-        type: 3}
-      propertyPath: m_Channels.Array.data[0]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
-        type: 3}
-      propertyPath: m_UseSimulator
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
-        type: 3}
-      propertyPath: m_SpawnPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 6915785215881051850, guid: ea7d6793f99304c46adba237a229c7a5,
-        type: 3}
     - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
         type: 3}
       propertyPath: m_SpawnPrefabs.Array.data[1]
       value: 
-      objectReference: {fileID: 6915785215881051850, guid: bbabdfc44f25293439546b6683905397,
+      objectReference: {fileID: 6915785215881051850, guid: ea7d6793f99304c46adba237a229c7a5,
         type: 3}
     - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
         type: 3}
-      propertyPath: m_OnlineScene
-      value: WillMessingWithStuff
-      objectReference: {fileID: 0}
+      propertyPath: m_SpawnPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 6915785215881051850, guid: bbabdfc44f25293439546b6683905397,
+        type: 3}
     - target: {fileID: 2718526630223148004, guid: 2c9a1742e359df044ad01cfb316808c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3515,7 +3479,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -792319971
-  m_SortingLayer: 0
+  m_SortingLayer: -4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 8bd61a6153596c14585905e77f32df6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
