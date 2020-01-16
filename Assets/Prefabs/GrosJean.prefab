@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 563130856900898416}
   - component: {fileID: 4987985790062337922}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7350913418854440676}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CeilingCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: -7425125147365972204}
   - component: {fileID: 1804227461628515865}
   - component: {fileID: 1047542211904283701}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GrosJean
   m_TagString: GrosJean
   m_Icon: {fileID: 0}

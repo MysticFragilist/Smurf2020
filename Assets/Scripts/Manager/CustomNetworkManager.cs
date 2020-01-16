@@ -10,10 +10,10 @@ public class CustomNetworkManager : NetworkManager
     public string host = "localhost";
     public List<GameObject> playerPrefabs;
 
-    public Transform spawnPoint;
     public float SpawnRadius = 0.5f;
 
     public void StartHosting() {
+        playersConnected = new Dictionary<short, GameObject>();
         SetPort();
         NetworkManager.singleton.StartHost();
     }
@@ -34,6 +34,7 @@ public class CustomNetworkManager : NetworkManager
 
     public void DisconnectFromHost() {
         NetworkManager.singleton.StopHost();
+        // TODO: Revenir a la scene du menu
     }
         
     public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController playerController) {
@@ -43,7 +44,7 @@ public class CustomNetworkManager : NetworkManager
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId) {
         Debug.Log("Players Connected: " + playersConnected.Count);
         GameObject player = null;
-        Vector3 spawnPosition = spawnPoint.position;
+        Vector3 spawnPosition = GetStartPosition().position;
 
         // The host is connecting
         if (playersConnected.Count == 0) {
