@@ -4,15 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-<<<<<<< HEAD
-  m_Scenes: []
-=======
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MenuSam.unity
+    guid: 173b88ec900955844a8831e873fb423c
+  - enabled: 0
     path: Assets/Scenes/MenuParticles.unity
     guid: c5d8e041fd48ac249aef07251b19595b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LevelCamjo.unity
     guid: 99f4e3969d75bb448955da7650263420
->>>>>>> 31b0cb60fc7d31f7a1b2ab12dc7620d6c9d2b019
+  - enabled: 1
+    path: Assets/Scenes/Samuel.unity
+    guid: 2427ced27da0bbf4387606aa5d40d3f6
   m_configObjects: {}

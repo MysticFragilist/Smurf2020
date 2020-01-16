@@ -57,7 +57,7 @@ public class CharacterController2D : NetworkBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(m_GroundCheck.position, Vector2.down, raycastLength, m_WhatIsGround);
        
-        if (hit.collider != null && hit.collider.gameObject.layer == 9) {
+        if (hit.collider != null && (hit.collider.gameObject.layer == 9 || hit.collider.gameObject.layer == 12)) {
             m_Grounded = true;
             if (!wasGrounded)
                 OnLandEvent.Invoke();

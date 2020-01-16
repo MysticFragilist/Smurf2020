@@ -17,6 +17,9 @@ public class CustomNetworkManager : NetworkManager
     public void StartHosting() {
         playersConnected = new Dictionary<short, GameObject>();
         SetPort();
+        
+        NetworkServer.RegisterHandler(MsgType.Connect, OnServerConnect);
+        NetworkServer.RegisterHandler(MsgType.Ready, OnClientReady);
         NetworkManager.singleton.StartHost();
     }
 
@@ -39,6 +42,9 @@ public class CustomNetworkManager : NetworkManager
         SceneManager.LoadScene("MenuParticles");
     }
 
+    void OnServerConnect(NetworkMessage msg) {
+        Debug.Log("New client connected: " + msg.conn);
+    }
     public override void OnStopServer()
     {
         playersConnected.Clear();
@@ -55,7 +61,7 @@ public class CustomNetworkManager : NetworkManager
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId) {
-        Debug.Log("Players Connected: " + playersConnected.Count);
+        
         GameObject player = null;
         Vector3 spawnPosition = GetStartPosition().position;
 
@@ -77,6 +83,24 @@ public class CustomNetworkManager : NetworkManager
                 playersConnected.Add(playerControllerId, player);
             }
             NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
+        }
+        Debug.Log("Players Connected: " + playersConnected.Count);
+    }
+    
+    void OnClientReady(NetworkMessage msg) {
+        Debug.Log("Client is ready to start: " + msg.conn);
+        NetworkServer.SetClientReady(msg.conn);
+        SpawnObjectWithTags("Lever");
+        SpawnObjectWithTags("Elevator");
+        SpawnObjectWithTags("Plate");
+    }
+
+    void SpawnObjectWithTags(string tag)
+    {
+        GameObject[] list = GameObject.FindGameObjectsWithTag(tag);
+
+        foreach (GameObject obj in list) {
+            NetworkServer.Spawn(obj);
         }
     }
 }

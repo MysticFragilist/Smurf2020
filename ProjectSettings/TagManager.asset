@@ -10,6 +10,9 @@ TagManager:
   - TiGuy
   - Destroyable
   - GM
+  - Lever
+  - Elevator
+  - Plate
   layers:
   - Default
   - TransparentFX

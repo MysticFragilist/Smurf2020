@@ -42,7 +42,7 @@ public class Punch : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(grabPos.position, Vector2.right * transform.localScale.x, distance, boxMask);
                 
                 if (hit.collider != null && hit.collider.gameObject.tag == "Destroyable") {
-                    Destroy(hit.collider.gameObject);
+                    hit.collider.gameObject.transform.position = new Vector2(999999, 99999);
                 }
             }
         }

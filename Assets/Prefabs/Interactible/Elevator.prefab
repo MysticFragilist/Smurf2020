@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8730042669638154329}
   m_Layer: 9
   m_Name: Elevator
-  m_TagString: Untagged
+  m_TagString: Elevator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -203,6 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listActionableObjects:
   - {fileID: 0}
+  andGate: 1
   OnActiveEvent:
     m_PersistentCalls:
       m_Calls:
@@ -231,3 +232,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positionToGo: {fileID: 0}
   speed: 1.5
+  interacteableObject: {fileID: 0}

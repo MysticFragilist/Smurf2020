@@ -14,7 +14,7 @@ public class ElevatorObject : NetworkBehaviour
     public Transform positionToGo;
     Vector3 elevatorOrigin;
 
-    public float speed = 3f;
+    public float speed = 1.5f;
     [SyncVar]
     private StateElevator m_state;
     public StateElevator State { get { return m_state;} }
@@ -32,7 +32,6 @@ public class ElevatorObject : NetworkBehaviour
         else if(m_state == StateElevator.MOVING_DOWN && this.transform.position.y <= this.elevatorOrigin.y) {
             m_state = StateElevator.DOWN;
         }
-        Debug.Log(interacteableObject);
         if(interacteableObject.isActive && !(m_state == StateElevator.UP)) {
             m_state = StateElevator.MOVING_UP;
         }
@@ -48,6 +47,7 @@ public class ElevatorObject : NetworkBehaviour
     }
     public void OnActiveChange()
     {
+        Debug.Log("Excellent");
         if(interacteableObject.isActive && !(m_state == StateElevator.UP)) {
             m_state = StateElevator.MOVING_UP;
         }
