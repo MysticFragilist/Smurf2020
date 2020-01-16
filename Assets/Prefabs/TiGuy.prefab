@@ -444,7 +444,7 @@ MonoBehaviour:
   distance: 0.15
   boxMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 1847
   grabPos: {fileID: 1836817513729433684}
 --- !u!114 &589203218
 MonoBehaviour:

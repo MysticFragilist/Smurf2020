@@ -110,6 +110,7 @@ public class CharacterController2D : NetworkBehaviour
     [ClientRpc]
     public void RpcOnFaceSideChange(bool faceRight) 
 	{
+		Debug.Log("Change face");
         m_FacingRight = faceRight;
 
 		Vector3 theScale = transform.localScale;

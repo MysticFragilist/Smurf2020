@@ -8,7 +8,7 @@ public class InteracteableObject : NetworkBehaviour
 {
     public List<ActionableObject> listActionableObjects;
 
-    bool isActive = false;
+    public bool isActive { get; private set; } = false;
 
     [Header("Events")]
 	[Space]
@@ -22,8 +22,12 @@ public class InteracteableObject : NetworkBehaviour
 
     public void CheckIfActive() {
         foreach (ActionableObject obj in listActionableObjects) {
-            if (!obj.isActivated) return;
+            if (!obj.isActivated)  {
+                isActive = false;
+                return;
+            }
         }
+        isActive = true;
         OnActiveEvent.Invoke();
     }
 }
