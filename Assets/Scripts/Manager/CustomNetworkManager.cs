@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
+
 
 public class CustomNetworkManager : NetworkManager
 {
@@ -10,10 +12,10 @@ public class CustomNetworkManager : NetworkManager
     public string host = "localhost";
     public List<GameObject> playerPrefabs;
 
-    public Transform spawnPoint;
     public float SpawnRadius = 0.5f;
 
     public void StartHosting() {
+        playersConnected = new Dictionary<short, GameObject>();
         SetPort();
         NetworkManager.singleton.StartHost();
     }
@@ -34,8 +36,20 @@ public class CustomNetworkManager : NetworkManager
 
     public void DisconnectFromHost() {
         NetworkManager.singleton.StopHost();
+        SceneManager.LoadScene("MenuParticles");
     }
-        
+
+    public override void OnStopServer()
+    {
+        playersConnected.Clear();
+        base.OnStopServer();
+    }
+
+    public override void OnClientDisconnect(NetworkConnection conn)
+    {
+        SceneManager.LoadScene("MenuParticles");
+        base.OnClientDisconnect(conn);
+    }
     public override void OnServerRemovePlayer(NetworkConnection conn, PlayerController playerController) {
         playersConnected.Remove(playerController.playerControllerId);
     }
@@ -43,12 +57,13 @@ public class CustomNetworkManager : NetworkManager
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId) {
         Debug.Log("Players Connected: " + playersConnected.Count);
         GameObject player = null;
-        Vector3 spawnPosition = spawnPoint.position;
+        Vector3 spawnPosition = GetStartPosition().position;
 
         // The host is connecting
         if (playersConnected.Count == 0) {
             spawnPosition.x += SpawnRadius;
             player = Instantiate(playerPrefabs[0], spawnPosition, Quaternion.identity);
+            
 
         // A second client is connecting after the host
         } else if (playersConnected.Count == 1) {
