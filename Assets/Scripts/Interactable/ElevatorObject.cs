@@ -15,39 +15,43 @@ public class ElevatorObject : NetworkBehaviour
     Vector3 elevatorOrigin;
 
     public float speed = 3f;
-    [SyncVar(hook="OnStateChange")]
+    [SyncVar]
     private StateElevator m_state;
     public StateElevator State { get { return m_state;} }
+
+    public InteracteableObject interacteableObject;
 
     void Start() {
         m_state = StateElevator.DOWN;
         elevatorOrigin = this.transform.position;
-        Debug.Log("Origin:" + elevatorOrigin.y);
     }
     private void FixedUpdate() {
         if(m_state == StateElevator.MOVING_UP && this.transform.position.y >= positionToGo.position.y) {
             m_state = StateElevator.UP;
         }
         else if(m_state == StateElevator.MOVING_DOWN && this.transform.position.y <= this.elevatorOrigin.y) {
-            Debug.Log("arrived");
-            Debug.Log("origin: " + this.elevatorOrigin.y + " actual:" + transform.position.y);
             m_state = StateElevator.DOWN;
         }
-
+        Debug.Log(interacteableObject);
+        if(interacteableObject.isActive && !(m_state == StateElevator.UP)) {
+            m_state = StateElevator.MOVING_UP;
+        }
+        else if (!interacteableObject.isActive && !(m_state == StateElevator.DOWN)) {
+            m_state = StateElevator.MOVING_DOWN;
+        }
         if(m_state == StateElevator.MOVING_UP) {
             this.transform.position += Vector3.up * speed * Time.deltaTime;
         }
         else if(m_state == StateElevator.MOVING_DOWN) {
             this.transform.position += Vector3.down * speed * Time.deltaTime;
-            Debug.Log("moving down");
         }
     }
     public void OnActiveChange()
     {
-        if(m_state == StateElevator.DOWN) {
+        if(interacteableObject.isActive && !(m_state == StateElevator.UP)) {
             m_state = StateElevator.MOVING_UP;
         }
-        else if (m_state == StateElevator.UP) {
+        else if (!interacteableObject.isActive && !(m_state == StateElevator.DOWN)) {
             m_state = StateElevator.MOVING_DOWN;
         }
     }

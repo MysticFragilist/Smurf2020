@@ -291,8 +291,14 @@ PrefabInstance:
     - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
         type: 3}
       propertyPath: m_OnlineScene
-      value: WillMessingWithStuff
+      value: Samuel
       objectReference: {fileID: 0}
+    - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
+        type: 3}
+      propertyPath: m_SpawnPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 6915785215881051850, guid: bbabdfc44f25293439546b6683905397,
+        type: 3}
     - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
         type: 3}
       propertyPath: m_SpawnPrefabs.Array.data[1]
@@ -301,9 +307,15 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
         type: 3}
-      propertyPath: m_SpawnPrefabs.Array.data[0]
+      propertyPath: playerPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 6915785215881051850, guid: bbabdfc44f25293439546b6683905397,
+        type: 3}
+    - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
+        type: 3}
+      propertyPath: playerPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 6915785215881051850, guid: ea7d6793f99304c46adba237a229c7a5,
         type: 3}
     - target: {fileID: 2718526630223148004, guid: 2c9a1742e359df044ad01cfb316808c1,
         type: 3}

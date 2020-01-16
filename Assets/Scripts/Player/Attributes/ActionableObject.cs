@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -15,25 +16,28 @@ public class ActionableObject : NetworkBehaviour
     public ActivableCandidate CandidateToUse = ActivableCandidate.ANY;
     public List<InteracteableObject> listInteractableObjects;
     public bool isActivated {get; private set; } = false;
-    public bool hasInteractableButton = true;
+    public bool isLeverHandle = true;
     public GameObject prefabButtonActive;
     private GameObject ButtonDisplayFabricated = null;
     void Update() 
     {
-        if (isActivated) this.GetComponent<SpriteRenderer>().sprite = spriteActive;
-        if (hasInteractableButton && ButtonDisplayFabricated != null && Input.GetButtonDown("Crouch")) 
+        if (isLeverHandle && ButtonDisplayFabricated != null && Input.GetButtonDown("Fire1")) 
         {
-            Activate(1, ActivableCandidate.GROSJEAN);
+            if (GameObject.FindGameObjectWithTag("GrosJean").GetComponent<CharacterController2D>().isLocalPlayer)
+            {
+                Debug.Log("Gros tas");
+            }
+                Activate(1, ActivableCandidate.GROSJEAN);
         }
     }
 
-    public void Activate(int forceUse, ActivableCandidate candidate) 
+    public void Activate(int forceUse, ActivableCandidate candidate)
     {
         if (forceUse >= forceToMakeItActive && (candidate == CandidateToUse || CandidateToUse == ActivableCandidate.ANY)) 
         {
             isActivated = !isActivated;
-            if (isActivated) this.GetComponent<SpriteRenderer>().sprite = spriteActive;
-            else this.GetComponent<SpriteRenderer>().sprite = spriteInactive;
+            if (isActivated) CmdServerSpriteShare(spriteActive);
+            else CmdServerSpriteShare(spriteInactive);
             
             foreach (InteracteableObject inter in listInteractableObjects)
             {
@@ -43,8 +47,17 @@ public class ActionableObject : NetworkBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (!hasInteractableButton)
+        if (!isLeverHandle) {
+            if (other.tag == "TiGuy") {
+                if (other.gameObject.GetComponent<TiGuyCharacterController2D>().isLocalPlayer) {
+                    Activate(20, ActivableCandidate.TIGUY);
+                }
+            }
+            else if (other.tag == "Pushable") {
+                Activate(5, ActivableCandidate.TIGUY);
+            }
             return;
+        }
 
         if (other is CircleCollider2D)
             return;
@@ -54,18 +67,46 @@ public class ActionableObject : NetworkBehaviour
             case ActivableCandidate.GROSJEAN:
                 Tag = "GrosJean";
                 break;
+            case ActivableCandidate.TIGUY:
+                Tag = "TiGuy";
+                break;
         }
-        Debug.Log("Tag: " + other.tag);
         if (other.tag != Tag)
             return;
-        
+
+        if(!other.GetComponent<CharacterController2D>().isLocalPlayer)
+            return;
+
         Vector3 pos = this.transform.localPosition;
         pos.y += 0.25f;
         ButtonDisplayFabricated = Instantiate(prefabButtonActive, pos, Quaternion.identity);
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        Debug.Log("Destroying");
-        Destroy(ButtonDisplayFabricated);
+        if(!isLeverHandle) {
+            if (other.tag == "TiGuy") {
+                if (other.gameObject.GetComponent<TiGuyCharacterController2D>().isLocalPlayer) {
+                    Activate(20, ActivableCandidate.TIGUY);
+                }
+            }
+            else if (other.tag == "Pushable") {
+                Activate(5, ActivableCandidate.TIGUY);
+            }
+        }
+        else {
+            Destroy(ButtonDisplayFabricated);
+        }
+    }
+
+    [Command]
+    public void CmdServerSpriteShare(Sprite newSprite) {
+        Debug.Log("Send");
+        RpcClientSendServerSprite(newSprite);
+    }
+
+    [ClientRpc]
+    public void RpcClientSendServerSprite(Sprite newSprite) {
+        Debug.Log("Receive");
+        this.GetComponent<SpriteRenderer>().sprite = newSprite;
     }
 }
