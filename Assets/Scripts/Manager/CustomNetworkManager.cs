@@ -9,7 +9,7 @@ public class CustomNetworkManager : NetworkManager
 {
     Dictionary<short, GameObject> playersConnected = new Dictionary<short, GameObject>();
 
-    public string host = "localhost";
+    public string host = "192.168.1.101";
     public List<GameObject> playerPrefabs;
 
     public float SpawnRadius = 0.5f;

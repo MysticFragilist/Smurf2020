@@ -47,7 +47,6 @@ public class ElevatorObject : NetworkBehaviour
     }
     public void OnActiveChange()
     {
-        Debug.Log("Excellent");
         if(interacteableObject.isActive && !(m_state == StateElevator.UP)) {
             m_state = StateElevator.MOVING_UP;
         }

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -15,28 +14,22 @@ public class ActionableObject : NetworkBehaviour
     public int forceToMakeItActive = 1;
     public ActivableCandidate CandidateToUse = ActivableCandidate.ANY;
     public List<InteracteableObject> listInteractableObjects;
-
-    [SyncVar]
-    bool isActivated = false;
-
-    public bool IsActivated { get { return isActivated; } }
+    public bool isActivated {get; private set; } = false;
     public bool isLeverHandle = true;
     public GameObject prefabButtonActive;
     private GameObject ButtonDisplayFabricated = null;
-    private GameObject playerThatHasIntersect = null;
-    public override void OnStartClient() {
-        Debug.Log("Spawn in server");
-    }
     void Update() 
     {
-        if (isLeverHandle && Input.GetButtonDown("Crouch")) 
+        if (isLeverHandle && ButtonDisplayFabricated != null && Input.GetButtonDown("Fire1")) 
         {
-            if (playerThatHasIntersect == FindNetworkPlayer("GrosJean"))
+            if (GameObject.FindGameObjectWithTag("GrosJean").GetComponent<CharacterController2D>().isLocalPlayer)
             {
-                Activate(1, ActivableCandidate.GROSJEAN);
+                Debug.Log("Gros tas");
             }
+                Activate(1, ActivableCandidate.GROSJEAN);
         }
     }
+
     public void Activate(int forceUse, ActivableCandidate candidate)
     {
         if (forceUse >= forceToMakeItActive && (candidate == CandidateToUse || CandidateToUse == ActivableCandidate.ANY)) 
@@ -86,8 +79,6 @@ public class ActionableObject : NetworkBehaviour
         Vector3 pos = this.transform.localPosition;
         pos.y += 0.25f;
         ButtonDisplayFabricated = Instantiate(prefabButtonActive, pos, Quaternion.identity);
-        playerThatHasIntersect = other.gameObject;
-        NetworkServer.Spawn(ButtonDisplayFabricated);
     }
 
     private void OnTriggerExit2D(Collider2D other) {
@@ -107,30 +98,14 @@ public class ActionableObject : NetworkBehaviour
     }
 
     [Command]
-    public void CmdServerSpriteShare(bool newSpriteState) {
+    public void CmdServerSpriteShare(Sprite newSprite) {
         Debug.Log("Send");
-        RpcClientSendServerSprite(newSpriteState);
+        RpcClientSendServerSprite(newSprite);
     }
 
     [ClientRpc]
-    public void RpcClientSendServerSprite(bool newSpriteState) {
+    public void RpcClientSendServerSprite(Sprite newSprite) {
         Debug.Log("Receive");
-        
-        if(newSpriteState) this.GetComponent<SpriteRenderer>().sprite = spriteActive;
-        else this.GetComponent<SpriteRenderer>().sprite = spriteInactive;
-    }
-
-
-    GameObject FindNetworkPlayer(string name)
-    {
-        NetworkManager networkManager = NetworkManager.singleton;
-        List<PlayerController> pc = networkManager.client.connection.playerControllers;
-
-        for (int i = 0; i < pc.Count; i++)
-        {
-            if ((pc[i].IsValid) && (name == pc[i].gameObject.tag))
-                return pc[i].gameObject;
-        }
-        return null;
+        this.GetComponent<SpriteRenderer>().sprite = newSprite;
     }
 }

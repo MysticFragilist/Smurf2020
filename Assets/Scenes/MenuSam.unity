@@ -291,7 +291,7 @@ PrefabInstance:
     - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
         type: 3}
       propertyPath: m_OnlineScene
-      value: Samuel
+      value: LevelCamjo
       objectReference: {fileID: 0}
     - target: {fileID: 2718526630223147994, guid: 2c9a1742e359df044ad01cfb316808c1,
         type: 3}
@@ -405,7 +405,7 @@ PrefabInstance:
     - target: {fileID: 2718526630223148006, guid: 2c9a1742e359df044ad01cfb316808c1,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2718526630223148007, guid: 2c9a1742e359df044ad01cfb316808c1,
         type: 3}

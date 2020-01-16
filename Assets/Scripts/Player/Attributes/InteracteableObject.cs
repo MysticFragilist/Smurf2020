@@ -32,7 +32,7 @@ public class InteracteableObject : NetworkBehaviour
     public void CmdCheckAlive() {
         if (andGate) {
             foreach (ActionableObject obj in listActionableObjects) {
-                if (!obj.IsActivated)  {
+                if (!obj.isActivated)  {
                     RpcSendState(false);
                     return;
                 }
@@ -43,7 +43,7 @@ public class InteracteableObject : NetworkBehaviour
         }
         else {
             foreach (ActionableObject obj in listActionableObjects) {
-                if (obj.IsActivated)  {
+                if (obj.isActivated)  {
                     RpcSendState(true);
                     return;
                 }
