@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: -7425125147365972204}
   - component: {fileID: 1804227461628515865}
   - component: {fileID: 1047542211904283701}
+  - component: {fileID: -1825064695265514646}
   m_Layer: 11
   m_Name: GrosJean
   m_TagString: GrosJean
@@ -413,3 +414,15 @@ MonoBehaviour:
   controller: {fileID: 1804227461628515865}
   animator: {fileID: 6915785215881051845}
   runSpeed: 9
+--- !u!114 &-1825064695265514646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6915785215881051850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c0ffdcfc42c64b4b997e8a58afd0518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

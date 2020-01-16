@@ -63,6 +63,7 @@ public class CustomNetworkManager : NetworkManager
         if (playersConnected.Count == 0) {
             spawnPosition.x += SpawnRadius;
             player = Instantiate(playerPrefabs[0], spawnPosition, Quaternion.identity);
+            
 
         // A second client is connecting after the host
         } else if (playersConnected.Count == 1) {
