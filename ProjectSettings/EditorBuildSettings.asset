@@ -4,32 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/MenuParticles.unity
-    guid: c5d8e041fd48ac249aef07251b19595b
-  - enabled: 0
-    path: Assets/Scenes/LevelCamjo.unity
-    guid: 99f4e3969d75bb448955da7650263420
-<<<<<<< HEAD
-  - enabled: 0
-    path: Assets/Scenes/WillMessingWithStuff.unity
-    guid: 4f5d85c34bfc619409743dfbcd130e24
-  - enabled: 1
-    path: Assets/Scenes/MenuSam.unity
-    guid: 173b88ec900955844a8831e873fb423c
-  - enabled: 1
-    path: Assets/Scenes/Samuel.unity
-    guid: 2427ced27da0bbf4387606aa5d40d3f6
-=======
-  - enabled: 1
-    path: Assets/Scenes/MenuWill.unity
-    guid: ca429208810b39c43b4e9108d4aa8afb
-  - enabled: 1
-    path: Assets/Scenes/WillMessingWithStuff.unity
-    guid: 4f5d85c34bfc619409743dfbcd130e24
-  - enabled: 0
-    path: Assets/Scenes/VincentTemple.unity
-    guid: d7788d6f7b84b2941acb7dca1fb9c521
->>>>>>> 48e911f3d542aaf7bfcf70b84ed89019556e85c7
+  m_Scenes: []
   m_configObjects: {}
