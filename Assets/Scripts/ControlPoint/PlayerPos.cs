@@ -12,13 +12,15 @@ public class PlayerPos : MonoBehaviour
     {
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
         transform.position = gm.lastCheckPointPos;
+        DontDestroyOnLoad(this.gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(KeyCode.Keypad5)){
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            transform.position = gm.lastCheckPointPos;
         }
         
     }
