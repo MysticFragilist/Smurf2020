@@ -11,10 +11,15 @@ public enum ActivableCandidate {
 public class ActionableObject : NetworkBehaviour
 {
     public Sprite spriteInactive, spriteActive;
+    [SyncVar]
     public int forceToMakeItActive = 1;
+    [SyncVar]
     public ActivableCandidate CandidateToUse = ActivableCandidate.ANY;
     public List<InteracteableObject> listInteractableObjects;
-    public bool isActivated {get; private set; } = false;
+    
+    [SyncVar]
+    public bool isActivated = false;
+    [SyncVar]
     public bool isLeverHandle = true;
     public GameObject prefabButtonActive;
     private GameObject ButtonDisplayFabricated = null;
@@ -24,19 +29,22 @@ public class ActionableObject : NetworkBehaviour
         {
             if (GameObject.FindGameObjectWithTag("GrosJean").GetComponent<CharacterController2D>().isLocalPlayer)
             {
-                Debug.Log("Gros tas");
+                
+                if (!isActivated) CmdActivate(1, ActivableCandidate.GROSJEAN);
+                else CmdDeactivate();
             }
-                Activate(1, ActivableCandidate.GROSJEAN);
         }
     }
 
-    public void Activate(int forceUse, ActivableCandidate candidate)
+    [Command]
+    public void CmdActivate(int forceUse, ActivableCandidate candidate)
     {
+        if (isActivated) return;
+
         if (forceUse >= forceToMakeItActive && (candidate == CandidateToUse || CandidateToUse == ActivableCandidate.ANY)) 
         {
-            isActivated = !isActivated;
-            if (isActivated) CmdServerSpriteShare(spriteActive);
-            else CmdServerSpriteShare(spriteInactive);
+            CmdChangeActivate(true);
+            CmdServerSpriteShare(isActivated);
             
             foreach (InteracteableObject inter in listInteractableObjects)
             {
@@ -45,15 +53,41 @@ public class ActionableObject : NetworkBehaviour
         }
     }
 
+    [Command]
+    public void CmdDeactivate()
+    {
+        if (!isActivated) return;
+
+        CmdChangeActivate(false);
+        CmdServerSpriteShare(isActivated);
+            
+        foreach (InteracteableObject inter in listInteractableObjects)
+        {
+            inter.CheckIfActive();
+        }
+    }
+
+    [Command]
+    public void CmdChangeActivate(bool newActivated) {
+        isActivated = newActivated;
+        RpcChangeActivate(newActivated);
+    }
+
+    [ClientRpc]
+    private void RpcChangeActivate(bool newActivated) {
+        Debug.Log("Is Activated : " + newActivated);
+        this.isActivated = newActivated;
+    }
+
     private void OnTriggerEnter2D(Collider2D other) {
         if (!isLeverHandle) {
             if (other.tag == "TiGuy") {
                 if (other.gameObject.GetComponent<TiGuyCharacterController2D>().isLocalPlayer) {
-                    Activate(20, ActivableCandidate.TIGUY);
+                    CmdActivate(20, ActivableCandidate.TIGUY);
                 }
             }
             else if (other.tag == "Pushable") {
-                Activate(5, ActivableCandidate.TIGUY);
+                CmdActivate(5, ActivableCandidate.TIGUY);
             }
             return;
         }
@@ -85,11 +119,11 @@ public class ActionableObject : NetworkBehaviour
         if(!isLeverHandle) {
             if (other.tag == "TiGuy") {
                 if (other.gameObject.GetComponent<TiGuyCharacterController2D>().isLocalPlayer) {
-                    Activate(20, ActivableCandidate.TIGUY);
+                    CmdDeactivate();
                 }
             }
             else if (other.tag == "Pushable") {
-                Activate(5, ActivableCandidate.TIGUY);
+                CmdDeactivate();
             }
         }
         else {
@@ -98,14 +132,16 @@ public class ActionableObject : NetworkBehaviour
     }
 
     [Command]
-    public void CmdServerSpriteShare(Sprite newSprite) {
-        Debug.Log("Send");
-        RpcClientSendServerSprite(newSprite);
+    public void CmdServerSpriteShare(bool newActivated) {
+        isActivated = newActivated;
+        RpcClientSendServerSprite(isActivated);
     }
 
     [ClientRpc]
-    public void RpcClientSendServerSprite(Sprite newSprite) {
-        Debug.Log("Receive");
-        this.GetComponent<SpriteRenderer>().sprite = newSprite;
+    public void RpcClientSendServerSprite(bool newActivated) {
+        isActivated = newActivated;
+
+        if(isActivated) this.GetComponent<SpriteRenderer>().sprite = spriteActive;
+        else this.GetComponent<SpriteRenderer>().sprite = spriteInactive;
     }
 }

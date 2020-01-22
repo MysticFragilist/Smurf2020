@@ -103,4 +103,9 @@ public class CustomNetworkManager : NetworkManager
             NetworkServer.Spawn(obj);
         }
     }
+
+    public override void OnClientSceneChanged(NetworkConnection conn) {
+        base.OnClientSceneChanged(conn);
+        Debug.Log("Server triggered scene change and we've done the same, do any extra work here for the client...");
+    }
 }

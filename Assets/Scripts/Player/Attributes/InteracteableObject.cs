@@ -38,7 +38,7 @@ public class InteracteableObject : NetworkBehaviour
                 }
             }
             
-            isActive = true;
+            RpcSendState(true);
             OnActiveEvent.Invoke();
         }
         else {
